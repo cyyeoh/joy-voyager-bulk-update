@@ -1,6 +1,12 @@
 {
-  "name": "joy/voyager-bulk-update",
+  "name": "chun-yuan/voyager-bulk-update",
   "description": "This Laravel/Voyager module adds VoyagerBulkUpdate support to Voyager.",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/your-username/voyager-bulk-update"
+    }
+  ],
   "keywords": [
     "joy",
     "voyager-bulk-update",
