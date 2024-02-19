@@ -30,7 +30,7 @@ class VoyagerBulkUpdateServiceProvider extends ServiceProvider
         Voyager::addAction(\Joy\VoyagerBulkUpdate\Actions\BulkUpdateAction::class);
         Voyager::addAction(\Joy\VoyagerBulkUpdate\Actions\BulkAssigneeUpdateAction::class);
         Voyager::addAction(\Joy\VoyagerBulkUpdate\Actions\BulkParentUpdateAction::class);
-        Voyager::addAction(\Joy\VoyagerBulkUpdate\Actions\BulkStatusUpdateAction::class);
+        // Voyager::addAction(\Joy\VoyagerBulkUpdate\Actions\BulkStatusUpdateAction::class);
         Voyager::addAction(\Joy\VoyagerBulkUpdate\Actions\BulkRoleUpdateAction::class);
         Voyager::addAction(\Joy\VoyagerBulkUpdate\Actions\BulkFeaturedUpdateAction::class);
 
