@@ -110,58 +110,24 @@ $(function() {
     $bulkUpdateBtn.click(function () {
         var ids = [];
         var $checkedBoxes = $('#dataTable input[type=checkbox]:checked').not('.select_all');
-
-        // Assuming all checkboxes are under a table with id 'dataTable'
-        var checkboxes = $('#dataTable input[type=checkbox]');
-        
-        var statusColumnIndex = -1;
-        var allCheckboxesHaveSameStatus = true;
-        
-        // Find the index of the column containing the header text "Status"
-        $('#dataTable thead th').each(function(index) {
-            if ($(this).text().trim().toLowerCase() === 'status') {
-                statusColumnIndex = index;
-                return false; // exit the loop once status column is found
-            }
-        });
-        if (statusColumnIndex !== -1) {
-            var firstStatus = $('#dataTable tbody tr input[type=checkbox]:checked').first().closest('tr').find('td:eq(' + statusColumnIndex + ')').text().trim();
-            checkboxes.each(function() {
-                if ($(this).is(':checked')) {
-                    var currentStatus = $(this).closest('tr').find('td:eq(' + statusColumnIndex + ')').text().trim();
-                    if (currentStatus !== firstStatus) {
-                        allCheckboxesHaveSameStatus = false;
-                        return false; // exit the loop early if status is different
-                    }
-                }
-            });
-        } else {
-            allCheckboxesHaveSameStatus = false;
-        }
-        
         var count = $checkedBoxes.length;
         if (count) {
-            if(statusColumnIndex !== -1 && !allCheckboxesHaveSameStatus) {
-                toastr.warning('Not all checkbox rows have the same status.');
-            } else {
-                // Reset input value
-                $bulkUpdateInput.val('');
-                // Deletion info
-                var displayName = count > 1 ? '{{ $dataType->getTranslatedAttribute('display_name_plural') }}' : '{{ $dataType->getTranslatedAttribute('display_name_singular') }}';
-                displayName = displayName.toLowerCase();
-                $bulkUpdateCount.html(count);
-                $bulkUpdateDisplayName.html(displayName);
-                // Gather IDs
-                $.each($checkedBoxes, function () {
-                    var value = $(this).val();
-                    ids.push(value);
-                })
-                // Set input value
-                $bulkUpdateInput.val(ids);
-
-                // Show modal
-                $bulkUpdateModal.modal('show');
-            }
+            // Reset input value
+            $bulkUpdateInput.val('');
+            // Deletion info
+            var displayName = count > 1 ? '{{ $dataType->getTranslatedAttribute('display_name_plural') }}' : '{{ $dataType->getTranslatedAttribute('display_name_singular') }}';
+            displayName = displayName.toLowerCase();
+            $bulkUpdateCount.html(count);
+            $bulkUpdateDisplayName.html(displayName);
+            // Gather IDs
+            $.each($checkedBoxes, function () {
+                var value = $(this).val();
+                ids.push(value);
+            })
+            // Set input value
+            $bulkUpdateInput.val(ids);
+            // Show modal
+            $bulkUpdateModal.modal('show');
         } else {
             // No row selected
             toastr.warning('{{ __('joy-voyager-bulk-update::generic.bulk_update_nothing') }}');
